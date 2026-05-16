@@ -1,0 +1,202 @@
+body {
+  font-family: 'Heebo Light', sans-serif;
+  letter-spacing: 5px;
+  background: #171A26;
+  margin: 0;
+  padding: 0;
+}
+
+.logo{
+  display: flex;
+  align-items: center; 
+  gap: 20px;  
+}
+
+.container {
+  width: 450px;
+  margin: 100px auto;
+  background: #23293D;
+  padding: 10px 30px 10px;
+  align-items: center;
+  border-radius: 30px;  
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+  font-weight: lighter;
+  font-size: 15px;
+  text-align: left;
+}
+
+h2, h3 {
+  font-size: 20px;
+  font-weight: lighter;
+  text-align: center;
+  padding: 30px 00px 0px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+input {
+  padding: 8px;
+  margin-top: 5px;
+  border: 0px solid #ccc;
+  font-size: 10px ;
+  color: #333D5C;
+  background-color: #333D5C;
+} 
+
+.button-container {
+  display: flex;
+  gap: 10px;    
+  margin-top: 150px;
+  justify-content: center;
+  align-items: center;    
+    
+  
+  #log-in {
+    text-align: center;
+    padding: 10px 30px;
+    background: #371F6E;  
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #sign-up {
+    text-align: center;
+    padding: 10px 30px;
+    background: #23293D;  
+    color: white;
+    border-color: #371F6E;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #log-in:hover {
+    background: #005fa3;
+  }
+  #sign-up:hover {
+    background-color: #444f72;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+#loginMessage {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+body {
+  font-family: 'Heebo Light', sans-serif;
+  letter-spacing: 5px;
+  background: #171A26;
+  margin: 0;
+  padding: 0;
+}
+
+/* For all Buttons*/
+button{
+  font-family: 'Heebo Light', sans-serif;
+  letter-spacing: 5px;
+}
+
+.logo-container{
+  display: flex;         
+  align-items: center;   
+  gap: 20px; 
+}
+
+/* Main Header/Top Panel*/
+.header {
+  overflow: "hidden";
+  display: flex;
+  background: #23293D;
+  padding: 0px 20px;
+  align-items: center;
+  justify-content: space-between;
+  color: #242735;  
+}
+
+.header a:hover,.right-header button:hover{
+  background-color: #252b3f;
+  color: rgb(94, 70, 104); 
+}
+
+.header a.active {
+  color: rgb(255, 255, 255);
+}
+
+/*Items in the left side of the header*/
+.left-header{
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navigation a,.right-header button{
+  color: rgb(97, 94, 109);
+  text-align: center;
+  padding: 0px 30px;
+  font-size: 15px;
+}
+
+.navigation a {
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+/*Items in the right side of the header*/
+.right-header button{
+  background: none;  
+  border: none;
+  cursor: pointer;
+}
+
+.template, .dateAndTime, .recentMaterials{
+  padding: 10px 30px 10px;
+  align-items: center;
+  border-radius: 30px;  
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.template {
+  width: 1750px;
+   max-width: 100%; 
+  margin: 15px auto;
+  background-image: linear-gradient(160deg, #da9561, #da9561, #da9561,  #2C1C8A, #2C1C8A);
+}
+
+.bottom-template{
+  justify-content: space-around;
+  display: flex;  
+  margin: 15px, 10px;
+}
+
+.dateAndTime {
+  width: 350px;
+  max-width: 100%; 
+  background:#FF4747;
+}
+
+.dateAndTime h3{
+  font-size: 50px;
+}
+
+.recentMaterials {
+  width: 1000px;
+  max-width: 100%; 
+  background:#3b1a1a;
+}

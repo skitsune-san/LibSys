@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIBSYS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="contain" class="container">
+    <div class ="logo">
+      <img src="C:\Users\erold\Documents\Coding\LibSys\images\logo.png">
+      <h1 id="title" >LIBSYS</h1>
+    </div>  
+    <!-- Login Form -->
+    <div id="login-section">
+      <h2>LOG IN TO LIBSYS</h2>  
+      <form id="loginForm">
+        <label for="username">Name:</label>
+        <input type="text" placeholder="Enter Name"id="username" required>
+        
+        <label for="password">Password:</label>
+        <input type="password" placeholder="Enter Password" id="password" required>
+        
+        <div class = "button-container">
+          <button id= "log-in" type="submit">Log In</button>
+          <button id= "sign-up" type="submit">Sign Up</button>
+        </div>
+
+      </form>
+      <p id="loginMessage"></p>
+    </div>
+
+  </div>
+  <div id="dashboard" class="hidden">
+    
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
