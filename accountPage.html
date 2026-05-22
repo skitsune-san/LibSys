@@ -6,15 +6,36 @@
   <title>Profile Card</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body class = "accountBody">
+<body>
+
+  <div class="header">
+    <div class = "left-header">
+      <div class="logo-container">
+        <img src="C:\Users\erold\Documents\GitHub\LibSys\images\logo.png">
+        <h2 id="logoName">LIBSYS</h2>
+      </div>
+          
+        <nav class="navigation">
+          <a class="active" href="dashboard.html">HOME</a>
+          <a href="librarypage.html"> LIBRARY</a>
+          <a href="login_page.html">REQUESTS</a>
+        </nav>
+    </div>
+
+    <div class="right-header">
+      <a href="accountPage.html" id="account"><img src="C:\Users\erold\Documents\GitHub\LibSys\images\account.png">  Account</a>
+      <button id="notifications"><img src="C:\Users\erold\Documents\GitHub\LibSys\images\notifications.png">  Notifications</button>
+    </div>
+  </div>
+
   <div class="profileContainer">
     <div class="profile-card">
       <div class="profile-top">
         <div class="profile-avatar" aria-label="Profile photo"></div>
         <div class="profile-info">
           <span class="profile-role">Student</span>
-          <h1>Dela Cruz, Juan S jr.</h1>
-          <p>Laguna State Polytechnic University</p>
+          <h1 class="currentUsername">Dela Cruz, Juan S jr.</h1>
+          <p class = "institution" >Laguna State Polytechnic University</p>
         </div>
       </div>
       <div class="action-buttons">
