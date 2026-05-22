@@ -4,29 +4,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIBSYS</title>
-  <link rel="stylesheet" href="dashboard.css">
+  <title>LIBSYS Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 <div class="header">
-    
   <div class = "left-header">
     <div class="logo-container">
       <img src="C:\Users\erold\Documents\GitHub\LibSys\images\logo.png">
-      <h2 >LIBSYS</h2>
+      <h2 id="logoName">LIBSYS</h2>
     </div>
         
       <nav class="navigation">
-        <a class="active "href="index.html">HOME</a>
-        <a href="index.html"> LIBRARY</a>
+        <a class="active" href="dashboard.html">HOME</a>
+        <a href="librarypage.html"> LIBRARY</a>
         <a href="index.html">REQUESTS</a>
       </nav>
   </div>
 
   <div class="right-header">
-    <button id="account"><img src="C:\Users\erold\Documents\GitHub\LibSys\images\account.png">  Account</button>
+    <a href="login_page.html" id="account"><img src="C:\Users\erold\Documents\GitHub\LibSys\images\account.png">  Account</a>
     <button id="notifications"><img src="C:\Users\erold\Documents\GitHub\LibSys\images\notifications.png">  Notifications</button>
+  </div>
+      
+ 
+</div>
+
+ <div id  = "notifBar" class = "hidden">
+  <div class = "notif">
+    <h1>adhafhkas</h1>
   </div>
 </div>
 
@@ -41,13 +48,17 @@
 </div>
 
 <div class="bottom-template">
-  <div class="dateAndTime">
-    <p>date here</p>
-    <h3>Time here</h3>
-    <h6>am</h6>
+  <div class="bottomLeftBox">
+    <div class="dateAndTime" >
+      <p class="textDateAndTime">JAN 27, 2026</p>
+      <h3 class="textDateAndTime">00 00</h3>
+      <h6 class="textDateAndTime">AM</h6>
+    </div>
 
-    <p>Service status  </p>
-    <h6>Not Availablefor release</h6>
+    <div class="serviceStatus">
+      <p class="textServiceStatus">Service status  </p>
+      <h6 class="textServiceStatus">Not Availablefor release</h6>
+    </div>
   </div>
 
   <div class="recentMaterials">
@@ -57,6 +68,8 @@
     </div>
   </div>
 </div>
+
+<script src="script.js"></script>
 
 </body>
 </html>

@@ -3,13 +3,18 @@ body {
   letter-spacing: 5px;
   background: #171A26;
   margin: 0;
-  padding: 0;
 }
+
+/*Log In Page*/
 
 .logo{
   display: flex;
   align-items: center; 
   gap: 20px;  
+}
+
+#logoname{
+  font-size: ;
 }
 
 .container {
@@ -28,11 +33,10 @@ h1{
   text-align: left;
 }
 
-h2, h3 {
+h2{
   font-size: 20px;
   font-weight: lighter;
   text-align: center;
-  padding: 30px 00px 0px;
 }
 
 form {
@@ -61,7 +65,6 @@ input {
   justify-content: center;
   align-items: center;    
     
-  
   #log-in {
     text-align: center;
     padding: 10px 30px;
@@ -72,26 +75,25 @@ input {
     cursor: pointer;
   }
 
-  #sign-up {
-    text-align: center;
-    padding: 10px 30px;
-    background: #23293D;  
-    color: white;
-    border-color: #371F6E;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  #log-in:hover {
-    background: #005fa3;
-  }
-  #sign-up:hover {
-    background-color: #444f72;
-  }
+#sign-up {
+  text-align: center;
+  padding: 10px 30px;
+  background: #23293D;  
+  color: white;
+  border-color: #371F6E;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#log-in:hover {
+  background: #005fa3;
+}
+#sign-up:hover {
+  background-color: #444f72;
 }
 
-.hidden {
-  display: none;
 }
+
+
 
 #loginMessage {
   color: red;
@@ -99,20 +101,13 @@ input {
   margin-top: 10px;
 }
 
-body {
-  font-family: 'Heebo Light', sans-serif;
-  letter-spacing: 5px;
-  background: #171A26;
-  margin: 0;
-  padding: 0;
-}
-
 /* For all Buttons*/
 button{
   font-family: 'Heebo Light', sans-serif;
   letter-spacing: 5px;
 }
-
+ 
+/*Header*/
 .logo-container{
   display: flex;         
   align-items: center;   
@@ -122,81 +117,296 @@ button{
 /* Main Header/Top Panel*/
 .header {
   overflow: "hidden";
-  display: flex;
+  position: fixed;
+  top: 0;
+  display: flex  ;
   background: #23293D;
   padding: 0px 20px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   color: #242735;  
 }
 
 .header a:hover,.right-header button:hover{
   background-color: #252b3f;
-  color: rgb(94, 70, 104); 
+   color: rgb(94, 70, 104); 
 }
 
 .header a.active {
-  color: rgb(255, 255, 255);
+  color:  rgb(255, 255, 255);
 }
 
 /*Items in the left side of the header*/
 .left-header{
   display: inline-flex;
   align-items: center;
+  align-content: end;
   gap: 20px;
 }
 
 .navigation a,.right-header button{
   color: rgb(97, 94, 109);
   text-align: center;
-  padding: 0px 30px;
+  /* padding: 0px 10px; */
   font-size: 15px;
 }
 
-.navigation a {
+.navigation a, .right-header a {
   text-decoration: none;
   text-transform: capitalize;
 }
 
 /*Items in the right side of the header*/
+.right-header{
+  align-items: baseline;
+  margin-left: 1055px;
+}
+
 .right-header button{
   background: none;  
   border: none;
   cursor: pointer;
 }
+/* notifications */
+.notif{
+  background-color: #D3D3D3;
+  
+}
 
-.template, .dateAndTime, .recentMaterials{
-  padding: 10px 30px 10px;
+#notifBar.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#notifBar.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#notifBar{
+ position: fixed;
+  right: 20px;
+  top: 80px;
+  width: 400px;
+  height: 300px;
+  background: #23293D;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/*Dashboard*/
+.template, .bottomLeftBox, .recentMaterials{
+  padding: 0px 20px 10px;
   align-items: center;
   border-radius: 30px;  
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .template {
+  margin: 80px 25px 10px;
   width: 1750px;
-   max-width: 100%; 
-  margin: 15px auto;
-  background-image: linear-gradient(160deg, #da9561, #da9561, #da9561,  #2C1C8A, #2C1C8A);
+  height: 350px;
+  max-width: 100%; 
+  background-image: linear-gradient(120deg, #da9561, #da9561, #da9561,  #33209c, #33209c);
 }
 
 .bottom-template{
-  justify-content: space-around;
+  /* justify-content: space-around; */
   display: flex;  
-  margin: 15px, 10px;
+  height: 450px;
 }
 
-.dateAndTime {
-  width: 350px;
+.bottomLeftBox {
+  /* display: flex;   */
+  width: 450px;
+  margin-left: 25px;
+  margin-right: 0px;
   max-width: 100%; 
   background:#FF4747;
 }
 
-.dateAndTime h3{
-  font-size: 50px;
+.dateAndTime{
+  display: grid;
+  place-items: center;
+  margin: 75px 0px;
 }
 
+.textDateAndTime{
+  margin:-50px
+}
+
+.serviceStatus{
+  font-size: 20px;
+  margin-top: 150px;
+  margin-left: 20px;
+}
+
+.textServiceStatus{
+  display: grid;
+  place-items: start;
+  margin: 0px 0px -50px; 
+}
+
+.dateAndTime h3{
+  margin: -5px;
+  font-size: 105px;
+} 
+
 .recentMaterials {
-  width: 1000px;
+  width: 1250px;
   max-width: 100%; 
-  background:#3b1a1a;
+  margin-left: 10px;
+  background: rgba(238, 148, 107, 0.10); 
+}
+
+
+.menuBar ul{
+  background-color: #ffee00;
+  color: #da9561;
+  list-style-type: none;
+  margin: 10px;
+  padding: 0;
+}
+
+/* Accpunt page */
+.accountBody {
+  font-family: 'Heebo Light', sans-serif;
+  letter-spacing: 0.8px;
+  background: #171A26;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.profileContainer {
+  width: 680px;
+  max-width: 100%;
+  height: 94vh;
+}
+
+.profile-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 34px;
+  background: linear-gradient(180deg, #ff7f6f 0%, #ff2a32 55%, #d81122 100%);
+  padding: 90px 28px 28px;
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.32);
+  height: 90vh;
+}
+
+
+.profile-top {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.profile-avatar {
+  position: absolute;
+  top: 12px;
+  left: 24px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+}
+
+.profile-info {
+  color: #ffffff;
+  margin-left: 240px;
+  padding-top: 8px;
+}
+
+.profile-role {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  opacity: 0.88;
+  margin-bottom: 10px;
+}
+
+.profile-info h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.profile-info p {
+  margin: 10px 0 0;
+  font-size: 13px;
+  opacity: 0.92;
+  letter-spacing: 0.5px;
+}
+
+.action-buttons {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 110px; /* above logout button */
+  display: flex;
+  gap: 14px;
+}
+
+.button {
+  font-family: 'Heebo Light', sans-serif;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 14px; /* smoother rectangular corners like image */
+  text-transform: capitalize; /* capital and small letters */
+  padding: 18px 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+}
+
+.edit-button, .view-button{
+  background: rgba(64, 12, 84, 0.95);
+  color: #fff;
+  flex: 1;
+  height: 64px; /* taller rectangular buttons */
+  border-radius: 14px;
+}
+
+.logout-button  {
+  background: #ff081d;
+  color: #ffffff;
+  width: calc(100% - 56px);
+  margin: 0 auto;
+  padding: 18px 20px;
+  font-size: 14px;
+  height: 64px;
+  border-radius: 14px;
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 20px;
+}
+
+
+h1,
+h2,
+label,
+input,
+button,
+a,
+p,
+span {
+  margin: 0;
+  padding: 0;
 }

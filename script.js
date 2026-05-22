@@ -19,8 +19,8 @@ loginForm.addEventListener("submit", function(event) {
   
   if (username === validUser.username && password === validUser.password) {
     loginMessage.textContent = "";
-    contain.classList.add("hidden");
-    dashboard.classList.remove("hidden");
+    window.location.href = "dashboard.html";
+    
   } else {
     loginMessage.textContent = "Invalid username or password!";
   }
@@ -30,4 +30,13 @@ logoutBtn.addEventListener("click", function() {
   dashboard.classList.add("hidden");
   loginSection.classList.remove("hidden");
   loginForm.reset();
+});
+
+// toggle notifications
+const notifBtn = document.getElementById("notifications");
+const notifBar = document.getElementById("notifBar");
+
+notifBtn.addEventListener("click", function() {
+  notifBar.classList.toggle("show");
+  notifBar.classList.toggle("hidden");
 });

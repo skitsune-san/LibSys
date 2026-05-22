@@ -57,6 +57,10 @@ font-family: 'Heebo Light', sans-serif;
 }
 
 /*Items in the right side of the header*/
+.right-header{
+  align-items: baseline;
+}
+
 .right-header button{
   background: none;  
   border: none;
