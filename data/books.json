@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Introduction to Programming",
+    "author": "John Smith",
+    "genre": "Computer Science",
+    "isbn": "978-0-13-110163-0",
+    "year": 2021,
+    "available": true,
+    "borrowedBy": null
+  },
+  {
+    "id": 2,
+    "title": "Data Structures and Algorithms",
+    "author": "Thomas Cormen",
+    "genre": "Computer Science",
+    "isbn": "978-0-26-204630-5",
+    "year": 2022,
+    "available": true,
+    "borrowedBy": null
+  },
+  {
+    "id": 3,
+    "title": "Operating Systems Concepts",
+    "author": "Abraham Silberschatz",
+    "genre": "Computer Science",
+    "isbn": "978-1-11-906333-0",
+    "year": 2020,
+    "available": false,
+    "borrowedBy": "student"
+  },
+  {
+    "id": 4,
+    "title": "Database System Concepts",
+    "author": "Henry F. Korth",
+    "genre": "Database",
+    "isbn": "978-0-07-802215-9",
+    "year": 2019,
+    "available": true,
+    "borrowedBy": null
+  },
+  {
+    "id": 5,
+    "title": "Web Development with JavaScript",
+    "author": "Jon Duckett",
+    "genre": "Web Development",
+    "isbn": "978-1-11-818342-8",
+    "year": 2023,
+    "available": true,
+    "borrowedBy": null
+  },
+  {
+    "id": 6,
+    "title": "Human-Computer Interaction",
+    "author": "Alan Dix",
+    "genre": "Computer Science",
+    "isbn": "978-0-13-046109-4",
+    "year": 2021,
+    "available": true,
+    "borrowedBy": null
+  },
+  {
+    "id": 7,
+    "title": "Discrete Mathematics",
+    "author": "Kenneth Rosen",
+    "genre": "Mathematics",
+    "isbn": "978-0-07-288008-3",
+    "year": 2018,
+    "available": false,
+    "borrowedBy": "faculty"
+  },
+  {
+    "id": 8,
+    "title": "Pano Kuhugin si Buddha",
+    "author": "Allen et al.",
+    "genre": "Buddism",
+    "isbn": "978-0-13-394303-0",
+    "year": 2023,
+    "available": true,
+    "borrowedBy": null
+  }
+]

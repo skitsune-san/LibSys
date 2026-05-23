@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIBSYS Requests</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="left-header">
+    <div class="logo-container">
+      <img src="images/logo.png" alt="LibSys Logo">
+      <h2 id="logoName">LIBSYS</h2>
+    </div>
+    <nav class="navigation">
+      <a href="dashboard.html">HOME</a>
+      <a href="librarypage.html">LIBRARY</a>
+      <a class="active" href="requests.html">REQUESTS</a>
+    </nav>
+  </div>
+  <div class="right-header">
+    <a href="accountPage.html" id="account">
+      <img src="images/account.png" alt="Account"> Account
+    </a>
+    <button id="notifications">
+      <img src="images/notifications.png" alt="Notifs"> Notifications
+    </button>
+    <button id="logoutBtn" class="logout-nav-btn">Log Out</button>
+  </div>
+</div>
+
+<div id="notifBar" class="hidden">
+  <div class="notif">
+    <h3>Notifications</h3>
+    <div id="notif-content"><p class="notif-empty">No new notifications.</p></div>
+  </div>
+</div>
+
+<div class="requests-wrapper">
+  <!-- Submit form — hidden for admin -->
+  <div id="submit-section">
+    <div class="requests-header">
+      <h2>Book Requests</h2>
+      <p class="requests-subtitle">Submit a request for a book not in the collection.</p>
+    </div>
+    <div class="requests-form-card">
+      <h3>New Request</h3>
+      <form id="requestForm">
+        <label for="req-title">Book Title:</label>
+        <input type="text" id="req-title" placeholder="Enter book title" required>
+        <label for="req-author">Author:</label>
+        <input type="text" id="req-author" placeholder="Enter author name" required>
+        <label for="req-reason">Reason:</label>
+        <textarea id="req-reason" placeholder="Why do you need this book?" rows="3"></textarea>
+        <button type="submit" class="borrow-btn" style="margin-top:16px;padding:10px 24px;">Submit Request</button>
+      </form>
+      <p id="req-message"></p>
+    </div>
+  </div>
+
+  <!-- Request list -->
+  <div class="requests-list-card">
+    <h3 id="list-title">Your Requests</h3>
+    <div id="requests-list"><p class="no-results">No requests submitted yet.</p></div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+  const sessionData = localStorage.getItem("libsys_user");
+  if (!sessionData) window.location.href = "login_page.html";
+  const user = JSON.parse(sessionData);
+  const isAdmin = user.role === "Admin";
+
+  // Admin sees all requests, others see only their own
+  if (isAdmin) {
+    document.getElementById("submit-section").style.display = "none";
+    document.getElementById("list-title").textContent = "All Submitted Requests";
+  }
+
+  function getRequests() {
+    return JSON.parse(localStorage.getItem("libsys_requests") || "[]");
+  }
+  function saveRequests(reqs) {
+    localStorage.setItem("libsys_requests", JSON.stringify(reqs));
+  }
+
+  function renderRequests() {
+    const list = document.getElementById("requests-list");
+    const all = getRequests();
+    const shown = isAdmin ? all : all.filter(r => r.submittedBy === user.username);
+
+    if (!shown.length) {
+      list.innerHTML = '<p class="no-results">No requests found.</p>';
+      return;
+    }
+
+    list.innerHTML = shown.map(r => {
+      const adminControls = isAdmin && r.status === "Pending"
+        ? '<div style="display:flex;gap:8px;margin-top:8px;">' +
+          '<button class="borrow-btn" style="font-size:11px;padding:4px 12px" onclick="updateStatus(' + r.id + ',\'Approved\')">Approve</button>' +
+          '<button class="borrow-btn" style="font-size:11px;padding:4px 12px;background:#4a1a1a;" onclick="updateStatus(' + r.id + ',\'Rejected\')">Reject</button>' +
+          '</div>' : "";
+      const statusColor = r.status === "Approved" ? "available" : r.status === "Rejected" ? "borrowed" : "book-genre-tag";
+      return '<div class="request-card">' +
+        '<strong>' + r.title + '</strong>' +
+        '<span>by ' + r.author + '</span>' +
+        (isAdmin ? '<span style="color:#9aa3bf;font-size:11px">Submitted by: ' + r.submittedBy + '</span>' : '') +
+        '<div style="display:flex;align-items:center;gap:8px;margin-top:4px;">' +
+        '<span class="book-badge ' + statusColor + '">' + r.status + '</span>' +
+        '<span style="color:#666;font-size:11px">' + r.date + '</span></div>' +
+        adminControls +
+        '</div>';
+    }).join("");
+  }
+
+  function updateStatus(id, newStatus) {
+    const reqs = getRequests();
+    const req = reqs.find(r => r.id === id);
+    if (req) {
+      req.status = newStatus;
+      saveRequests(reqs);
+      renderRequests();
+    }
+  }
+
+  document.getElementById("requestForm") && document.getElementById("requestForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const title  = document.getElementById("req-title").value.trim();
+    const author = document.getElementById("req-author").value.trim();
+    const reason = document.getElementById("req-reason").value.trim();
+    const msg    = document.getElementById("req-message");
+    const reqs   = getRequests();
+    reqs.push({
+      id: Date.now(), title, author, reason,
+      status: "Pending",
+      submittedBy: user.username,
+      date: new Date().toLocaleDateString("en-PH", { year:"numeric", month:"short", day:"numeric" })
+    });
+    saveRequests(reqs);
+    msg.textContent = "Request submitted!";
+    msg.style.color = "#4ade80";
+    this.reset();
+    renderRequests();
+    setTimeout(() => msg.textContent = "", 3000);
+  });
+
+  // Notifications
+  function buildNotifications() {
+    const content = document.getElementById("notif-content");
+    const reqs = getRequests();
+    const mine = isAdmin ? reqs : reqs.filter(r => r.submittedBy === user.username);
+    if (!mine.length) {
+      content.innerHTML = '<p class="notif-empty">No notifications.</p>';
+      return;
+    }
+    content.innerHTML = mine.map(r =>
+      '<div class="notif-item"><strong>' + r.title + '</strong>' +
+      (isAdmin ? 'From: ' + r.submittedBy + ' — ' : '') +
+      'Status: ' + r.status + '</div>'
+    ).join("");
+  }
+  buildNotifications();
+
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("libsys_user");
+    window.location.href = "login_page.html";
+  });
+  const notifBtn = document.getElementById("notifications");
+  const notifBar = document.getElementById("notifBar");
+  if (notifBtn && notifBar) {
+    notifBtn.addEventListener("click", () => {
+      const isHidden = notifBar.classList.contains("hidden");
+      if (isHidden) { notifBar.classList.remove("hidden"); notifBar.classList.add("show"); }
+      else { notifBar.classList.add("hidden"); notifBar.classList.remove("show"); }
+    });
+  }
+
+  renderRequests();
+</script>
+</body>
+</html>

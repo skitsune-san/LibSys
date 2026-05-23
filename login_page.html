@@ -1,39 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LIBSYS</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   <div id="contain" class="container">
-    <div class ="logo">
-      <img src="C:\Users\erold\Documents\GitHub\LibSys\images\logo.png">
-      <h1 id="title" >LIBSYS</h1>
-    </div>  
-    <!-- Login Form -->
+    <div class="logo">
+      <img src="images/logo.png" alt="LibSys Logo">
+      <h1 id="title">LIBSYS</h1>
+    </div>
+
+    <!-- LOGIN FORM -->
     <div id="login-section">
-      <h2>LOG IN TO LIBSYS</h2>  
+      <h2>LOG IN TO LIBSYS</h2>
       <form id="loginForm">
-        <label for="username">Name:</label>
-        <input type="text" placeholder="Enter Name"id="username" required>
-        
+        <label for="username">Username:</label>
+        <input type="text" placeholder="Enter Username" id="username" required>
+
         <label for="password">Password:</label>
         <input type="password" placeholder="Enter Password" id="password" required>
-        
-        <div class = "button-container">
-          <button id= "log-in" type="submit">Log In</button>
-          <button id= "sign-up" type="submit">Sign Up</button>
-        </div>
 
+        <div class="button-container">
+          <button id="log-in" type="submit">Log In</button>
+          <button id="sign-up" type="button">Sign Up</button>
+        </div>
       </form>
       <p id="loginMessage"></p>
     </div>
-  </div>
 
+    <!-- SIGN UP FORM (hidden by default) -->
+    <div id="signup-section" class="hidden" style="display:none">
+      <h2>CREATE ACCOUNT</h2>
+      <form id="signupForm">
+        <label for="su-name">Full Name:</label>
+        <input type="text" placeholder="Enter Full Name" id="su-name" required>
+
+        <label for="su-username">Username:</label>
+        <input type="text" placeholder="Choose a Username" id="su-username" required>
+
+        <label for="su-password">Password:</label>
+        <input type="password" placeholder="Choose a Password" id="su-password" required>
+
+        <label for="su-role">Role:</label>
+        <select id="su-role" class="su-select">
+          <option value="Student">Student</option>
+          <option value="Faculty">Faculty</option>
+        </select>
+
+        <label for="su-institution">Institution:</label>
+        <input type="text" placeholder="Enter your school/institution" id="su-institution">
+
+        <label for="su-email">Email (optional):</label>
+        <input type="email" placeholder="Enter your email" id="su-email">
+
+        <div class="button-container">
+          <button id="su-submit" type="submit">Create Account</button>
+          <button id="back-to-login" type="button">Back to Log In</button>
+        </div>
+      </form>
+      <p id="signupMessage"></p>
+    </div>
+
+  </div>
   <script src="script.js"></script>
 </body>
 </html>

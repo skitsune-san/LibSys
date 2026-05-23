@@ -3,47 +3,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile Card</title>
+  <title>LIBSYS Account</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="header">
-    <div class = "left-header">
+    <div class="left-header">
       <div class="logo-container">
-        <img src="C:\Users\erold\Documents\GitHub\LibSys\images\logo.png">
+        <img src="images/logo.png" alt="LibSys Logo">
         <h2 id="logoName">LIBSYS</h2>
       </div>
-          
-        <nav class="navigation">
-          <a class="active" href="dashboard.html">HOME</a>
-          <a href="librarypage.html"> LIBRARY</a>
-          <a href="login_page.html">REQUESTS</a>
-        </nav>
+      <nav class="navigation">
+        <a href="dashboard.html">HOME</a>
+        <a href="librarypage.html">LIBRARY</a>
+        <a href="requests.html">REQUESTS</a>
+      </nav>
     </div>
-
     <div class="right-header">
-      <a href="accountPage.html" id="account"><img src="C:\Users\erold\Documents\GitHub\LibSys\images\account.png">  Account</a>
-      <button id="notifications"><img src="C:\Users\erold\Documents\GitHub\LibSys\images\notifications.png">  Notifications</button>
+      <a href="accountPage.html" id="account">
+        <img src="images/account.png" alt="Account"> Account
+      </a>
+      <button id="notifications">
+        <img src="images/notifications.png" alt="Notifs"> Notifications
+      </button>
+      <button class="logout-nav-btn" id="logoutBtn">Log Out</button>
     </div>
   </div>
 
+  <div id="notifBar" class="hidden">
+    <div class="notif">
+      <h3>Notifications</h3>
+      <div id="notif-content"><p class="notif-empty">No new notifications.</p></div>
+    </div>
+  </div>
+
+  <!-- Profile Card -->
   <div class="profileContainer">
     <div class="profile-card">
       <div class="profile-top">
         <div class="profile-avatar" aria-label="Profile photo"></div>
         <div class="profile-info">
-          <span class="profile-role">Student</span>
-          <h1 class="currentUsername">Dela Cruz, Juan S jr.</h1>
-          <p class = "institution" >Laguna State Polytechnic University</p>
+          <span class="profile-role" id="profile-role">—</span>
+          <h1 class="currentUsername" id="profile-name">—</h1>
+          <p class="institution" id="profile-institution">—</p>
+          <p class="profile-email" id="profile-email"></p>
         </div>
       </div>
       <div class="action-buttons">
-        <button class="edit-button">Edit Profile</button>
-        <button class="view-button">View Archives</button>
+        <button class="edit-button" id="editProfileBtn">Edit Profile</button>
+        <button class="view-button" id="viewArchivesBtn">View Archives</button>
       </div>
-      <button class="logout-button">Log Out</button>
+      <button class="logout-button" id="logoutBtn2">Log Out</button>
     </div>
   </div>
+
+  <!-- EDIT PROFILE MODAL -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal-box">
+      <h3>Edit Profile</h3>
+      <label>Full Name</label>
+      <input type="text" id="edit-name" placeholder="Full Name">
+      <label>Email</label>
+      <input type="email" id="edit-email" placeholder="Email">
+      <label>Institution</label>
+      <input type="text" id="edit-institution" placeholder="School / Institution">
+      <label>New Password <span style="color:#666;font-size:10px">(leave blank to keep current)</span></label>
+      <input type="password" id="edit-password" placeholder="New password">
+      <div class="modal-actions">
+        <button class="modal-cancel-btn" id="editCancelBtn">Cancel</button>
+        <button class="modal-save-btn" id="editSaveBtn">Save</button>
+      </div>
+      <p class="modal-msg" id="edit-msg"></p>
+    </div>
+  </div>
+
+  <!--  VIEW ARCHIVES PANEL  -->
+  <div class="archives-panel" id="archivesPanel">
+    <div class="archives-box">
+      <h3>Borrow Archives</h3>
+      <div id="archives-list"></div>
+      <button class="archive-close-btn" id="archivesCloseBtn">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Session guard
+    const sessionData = localStorage.getItem("libsys_user");
+    if (!sessionData) { window.location.href = "login_page.html"; }
+    let user = JSON.parse(sessionData);
+
+    function refreshDisplay() {
+      document.getElementById("profile-name").textContent        = user.name        || "Unknown";
+      document.getElementById("profile-role").textContent        = user.role        || "—";
+      document.getElementById("profile-email").textContent       = user.email       || "";
+      document.getElementById("profile-institution").textContent = user.institution || "Not specified";
+    }
+    refreshDisplay();
+
+    // Logout
+    function doLogout() {
+      localStorage.removeItem("libsys_user");
+      window.location.href = "login_page.html";
+    }
+    document.getElementById("logoutBtn").addEventListener("click", doLogout);
+    document.getElementById("logoutBtn2").addEventListener("click", doLogout);
+
+    // Notifications
+    function buildNotifications() {
+      const content = document.getElementById("notif-content");
+      const reqs = JSON.parse(localStorage.getItem("libsys_requests") || "[]");
+      const mine = reqs.filter(r => r.submittedBy === user.username);
+      if (!mine.length) {
+        content.innerHTML = '<p class="notif-empty">No notifications.</p>';
+        return;
+      }
+      content.innerHTML = mine.map(r =>
+        '<div class="notif-item"><strong>' + r.title + '</strong>Request status: ' + r.status + '</div>'
+      ).join("");
+    }
+    buildNotifications();
+
+    const notifBtn = document.getElementById("notifications");
+    const notifBar = document.getElementById("notifBar");
+    if (notifBtn && notifBar) {
+      notifBtn.addEventListener("click", () => {
+        notifBar.classList.toggle("show");
+        notifBar.classList.toggle("hidden");
+      });
+    }
+
+    // Edit Profile
+    const editModal = document.getElementById("editModal");
+
+    document.getElementById("editProfileBtn").addEventListener("click", () => {
+      // Pre-fill form with current values
+      document.getElementById("edit-name").value        = user.name        || "";
+      document.getElementById("edit-email").value       = user.email       || "";
+      document.getElementById("edit-institution").value = user.institution || "";
+      document.getElementById("edit-password").value    = "";
+      document.getElementById("edit-msg").textContent   = "";
+      editModal.classList.add("open");
+    });
+
+    document.getElementById("editCancelBtn").addEventListener("click", () => {
+      editModal.classList.remove("open");
+    });
+
+    document.getElementById("editSaveBtn").addEventListener("click", () => {
+      const newName        = document.getElementById("edit-name").value.trim();
+      const newEmail       = document.getElementById("edit-email").value.trim();
+      const newInstitution = document.getElementById("edit-institution").value.trim();
+      const newPassword    = document.getElementById("edit-password").value;
+      const msg            = document.getElementById("edit-msg");
+
+      if (!newName) {
+        msg.textContent = "Name cannot be empty.";
+        msg.style.color = "#f87171";
+        return;
+      }
+
+      // Update the user object
+      user.name        = newName;
+      user.email       = newEmail;
+      user.institution = newInstitution || "Not specified";
+      if (newPassword) user.password = newPassword;
+
+      // Save back to session
+      localStorage.setItem("libsys_user", JSON.stringify(user));
+
+      // Also update in registered users list if they signed up
+      const regUsers = JSON.parse(localStorage.getItem("libsys_registered_users") || "[]");
+      const idx = regUsers.findIndex(u => u.id === user.id);
+      if (idx !== -1) {
+        regUsers[idx] = user;
+        localStorage.setItem("libsys_registered_users", JSON.stringify(regUsers));
+      }
+
+      refreshDisplay();
+      msg.textContent = "Profile updated!";
+      msg.style.color = "#4ade80";
+      setTimeout(() => editModal.classList.remove("open"), 1200);
+    });
+
+    // View Archives
+    // Archives = books the user has previously borrowed and returned
+    const archivesPanel = document.getElementById("archivesPanel");
+
+    document.getElementById("viewArchivesBtn").addEventListener("click", () => {
+      const history = JSON.parse(localStorage.getItem("libsys_borrow_history") || "[]");
+      const mine = history.filter(h => h.username === user.username);
+      const list = document.getElementById("archives-list");
+
+      if (!mine.length) {
+        list.innerHTML = '<p class="notif-empty" style="text-align:center;padding:20px;color:#666">No borrow history yet. Borrow and return a book to see it here.</p>';
+      } else {
+        list.innerHTML = mine.map(h =>
+          '<div class="archive-card">' +
+          '<strong>' + h.title + '</strong>' +
+          '<span>by ' + h.author + '</span>' +
+          '<span>Borrowed: ' + h.borrowedOn + '</span>' +
+          '<span>Returned: ' + h.returnedOn + '</span>' +
+          '</div>'
+        ).reverse().join(""); // most recent first
+      }
+
+      archivesPanel.classList.add("open");
+    });
+
+    document.getElementById("archivesCloseBtn").addEventListener("click", () => {
+      archivesPanel.classList.remove("open");
+    });
+
+    // Close modals when clicking outside the box
+    editModal.addEventListener("click", (e) => {
+      if (e.target === editModal) editModal.classList.remove("open");
+    });
+    archivesPanel.addEventListener("click", (e) => {
+      if (e.target === archivesPanel) archivesPanel.classList.remove("open");
+    });
+  </script>
+
 </body>
 </html>

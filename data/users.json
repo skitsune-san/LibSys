@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "username": "student",
+    "password": "library123",
+    "name": "Allen Lerado",
+    "role": "Student",
+    "email": "allen@school.edu",
+    "institution": "Laguna State Polytechnic University"
+  },
+  {
+    "id": 2,
+    "username": "faculty",
+    "password": "faculty123",
+    "name": "Prof. Erol Dwayne Dela Rosa",
+    "role": "Faculty",
+    "email": "erol@school.edu",
+    "institution": "Laguna State Polytechnic University"
+  },
+  {
+    "id": 3,
+    "username": "admin",
+    "password": "admin123",
+    "name": "Antonio Hipolito",
+    "role": "Admin",
+    "email": "admin@school.edu",
+    "institution": "Laguna State Polytechnic University"
+  }
+]

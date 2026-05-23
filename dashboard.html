@@ -1,75 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LIBSYS Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+
 <div class="header">
-  <div class = "left-header">
+  <div class="left-header">
     <div class="logo-container">
-      <img src="C:\Users\erold\Documents\GitHub\LibSys\images\logo.png">
+      <img src="images/logo.png" alt="LibSys Logo">
       <h2 id="logoName">LIBSYS</h2>
     </div>
-        
-      <nav class="navigation">
-        <a class="active" href="dashboard.html">HOME</a>
-        <a href="librarypage.html"> LIBRARY</a>
-        <a href="login_page.html">REQUESTS</a>
-      </nav>
+    <nav class="navigation">
+      <a class="active" href="dashboard.html">HOME</a>
+      <a href="librarypage.html">LIBRARY</a>
+      <a href="requests.html">REQUESTS</a>
+    </nav>
   </div>
-
   <div class="right-header">
-    <a href="accountPage.html" id="account"><img src="C:\Users\erold\Documents\GitHub\LibSys\images\account.png">  Account</a>
-    <button id="notifications"><img src="C:\Users\erold\Documents\GitHub\LibSys\images\notifications.png">  Notifications</button>
-  </div>
-      
- 
-</div>
-
- <div id  = "notifBar" class = "hidden">
-  <div class = "notif">
-    <h1>adhafhkas</h1>
+    <a href="accountPage.html" id="account">
+      <img src="images/account.png" alt="Account"> Account
+    </a>
+    <button id="notifications">
+      <img src="images/notifications.png" alt="Notifs"> Notifications
+    </button>
+    <button id="logoutBtn" class="logout-nav-btn">Log Out</button>
   </div>
 </div>
 
+<!-- Notification Panel -->
+<div id="notifBar" class="hidden">
+  <div class="notif">
+    <h3>Notifications</h3>
+    <div id="notif-content"><p class="notif-empty">No new notifications.</p></div>
+  </div>
+</div>
+
+<!-- Welcome Banner -->
 <div class="template">
-  <p>Welcome back</p>
-  <h3>Placeholder Name</h3>
-  <h6>Student/Faculty</h6>
-
-  <p>Placeholder  </p>
-  <h3>Placeholder Name</h3>
-  <h6>Placeholder</h6>
+  <p>Welcome back,</p>
+  <h3 id="welcome-name">Loading...</h3>
+  <h6 id="welcome-role">Role</h6>
 </div>
 
+<!-- Bottom panels -->
 <div class="bottom-template">
   <div class="bottomLeftBox">
-    <div class="dateAndTime" >
-      <p class="textDateAndTime">JAN 27, 2026</p>
-      <h3 class="textDateAndTime">00 00</h3>
-      <h6 class="textDateAndTime">AM</h6>
+    <div class="dateAndTime">
+      <p class="textDateAndTime" id="live-date"></p>
+      <!-- Clock with AM/PM inline -->
+      <h3 class="textDateAndTime" id="live-clock">00:00 <span id="clock-ampm" style="font-size:28px; vertical-align:middle;">AM</span></h3>
     </div>
-
     <div class="serviceStatus">
-      <p class="textServiceStatus">Service status  </p>
-      <h6 class="textServiceStatus">Not Availablefor release</h6>
+      <p class="textServiceStatus">System Status</p>
+      <h6 class="textServiceStatus"><span class="status-dot"></span>Online</h6>
     </div>
   </div>
 
   <div class="recentMaterials">
-    <p>Recent Materials</p>
-    <div>
-            
-    </div>
+    <p>Recently Added</p>
+    <div id="recent-books-list" class="recent-books-grid"></div>
   </div>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
